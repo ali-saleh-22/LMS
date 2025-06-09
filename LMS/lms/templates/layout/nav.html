@@ -1,0 +1,70 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+{% load static %}
+<link rel="stylesheet" href="{% static 'books/css/nav.css'%}">
+<div class="logo">MyBook</div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+           {% if user.is_authenticated %}
+           <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="{% url 'books.index' %}">Books</a>
+        </li>
+
+            {% endif %}
+
+
+                    {# --------------------------- is_staff ------------------------------------------ #}
+
+       {% if user.is_staff %}
+
+          <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="{% url 'students.index' %}">Students List</a>
+          </li>
+          <li class="nav-item">
+                  <a class="nav-link" href="{% url 'books.borrowed' %}">books borrowed</a>
+          </li>
+          <li class="nav-item">
+                  <a class="nav-link" href="{% url 'register.staff' %}">Add Admin</a>
+          </li>
+
+
+      {% endif %}
+
+                    {# -----------------------------------is_student---------------------------------- #}
+
+      {% if user.is_student %}
+
+          <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="{% url 'books.borrowed.student' %}">My Borrowed Books</a>
+          </li>
+
+      {% endif %}
+                    {# --------------------------------------------------------------------- #}
+
+{% if user.is_authenticated %}
+
+        <li>
+        <form action="{% url 'logout'%}?next={% url 'login'%}" method="post" >
+          {% csrf_token %}
+          <input type="submit" class=" nav-link px-3" value="logout">
+        </form>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile' %}">profile</a>
+        </li>
+        <li style="color:white;">{{ user }}<span style="font-size: 12px"> {% if user.is_staff %}(Admin){% else %}(student){% endif %}</span></li>
+
+
+
+{% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login'%}">login</a>
+        </li>
+        {% endif %}
+
+
+
+      </ul>
+    </div>
+  </div>
+</nav>

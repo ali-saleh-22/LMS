@@ -1,0 +1,14 @@
+{% extends 'layout/base.html'%}
+{% block content %}
+
+<div class="container my-5">
+<h2 class="text-center mb-4" style="font-weight: bold; color: #343a40;">Register as staff</h2>
+    <form method="post" class="bg-light p-4 rounded shadow-sm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary w-100 mt-3">Register</button>
+    </form>
+
+
+</div>
+{% endblock content %}

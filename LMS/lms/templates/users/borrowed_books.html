@@ -1,0 +1,35 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    <h2>Borrowed Books</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Book Id</th>
+                <th>Book Title</th>
+                <th>Borrower Name</th>
+                <th>Borrower Email</th>
+                <th>Borrow Date</th>
+                <th>Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for borrow in borrows %}
+                <tr>
+                    <td>{{ borrow.book.id }}</td>
+                    <td>{{ borrow.book.name }}</td>
+                    <td>
+                        {% for student in students %}
+                            {% if student.email == borrow.student_email %}
+                                {{ student.username }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ borrow.student_email }}</td>
+                    <td>{{ borrow.borrow_date }}</td>
+                    <td>{{ borrow.return_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

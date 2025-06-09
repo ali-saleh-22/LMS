@@ -1,0 +1,41 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+
+
+                 <div class="container d-flex justify-content-center align-items-center" style=" margin: 30px;">
+       <div class="card" style="width: 100%; max-width: 600px; height: 400px; box-shadow: 0 20px 20px rgba(0, 0, 0, 0.6);">
+           <div class="card-body d-flex flex-column justify-content-center">
+               <h2 class="card-title" style="font-size: 2rem;">Your Profile</h2>
+               <p><strong>Id:</strong> {{ user.id }}</p>
+               <p><strong>Username:</strong> {{ user.username }}</p>
+               <p><strong>Email:</strong> {{ user.email }}</p>
+               <h3 class="mt-4" style="font-size: 1.5rem;">Manage Profile</h3>
+               <ul class="list-unstyled mt-4">
+                   <li><a href="{% url 'profile.edit' %}" class="btn btn-warning">Edit Profile</a></li>
+                   <li><a href="{% url 'change_password' %}" class="btn btn-dark mt-2">Change Password</a></li>
+
+
+               </ul>
+           </div>
+       </div>
+   </div>
+                               
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

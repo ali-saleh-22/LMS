@@ -1,0 +1,38 @@
+{% extends 'layout/base.html'%}
+{% block content %}
+<h2 class="text-center my-4" style="font-weight: bold;color: #343a40;">My Borrowed Books</h2>
+
+<table style="margin:30px;" class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">book titile</th>
+      <th scope="col">Borrow Date</th>
+      <th scope="col">Return Date</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+  {% for borrow in borrowed_books %}
+
+    <tr>
+      <th scope="row">{{ borrow.book.id }}</th>
+      <td>{{ borrow.book.name }}</td>
+      <td>{{ borrow.borrow_date }}</td>
+      <td>{{ borrow.return_date }}</td>
+      <td>
+        <form action="{% url 'books.return' borrow.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">Return Book</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+
+
+{% endblock content %}

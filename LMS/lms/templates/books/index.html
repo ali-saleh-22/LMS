@@ -1,0 +1,34 @@
+{% extends 'layout/base.html'%}
+{% block content %}
+
+{% if user.is_staff %}
+<div class="mb-3 text-start" style="margin:10px;">
+    <a href="{% url 'books.create' %}" class="btn btn-primary">Add Book</a>
+  </div>
+{% endif %}
+<table style="margin:30px;" class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">name</th>
+      <th scope="col">author</th>
+      <th scope="col">action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+  {% for book in books %}
+    <tr>
+      <th scope="row">{{ book.id }}</th>
+      <td>{{ book.name }}</td>
+      <td>{{ book.author }}</td>
+      <td><a href="{{ book.show_url}}" class="btn btn-info">action</a></td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+
+
+{% endblock content %}

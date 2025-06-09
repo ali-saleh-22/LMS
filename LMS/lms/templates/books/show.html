@@ -1,0 +1,59 @@
+{% extends 'layout/base.html'%}
+{% block content %}
+
+<div class="container d-flex justify-content-center" style="margin:20px auto;">
+    <div class="card shadow-lg rounded-3 border-0 animated-card" style="margin-top: 30px; width: 22rem;">
+
+      <div class="card-body text-center">
+
+            <h4 class="card-title fw-bold text-primary">Book Name: {{ book.name }}</h4>
+            <h6 class="text-muted">Book ID: {{ book.id }}</h6>
+
+            <p class="mt-2 text-dark">
+                <strong>Description:</strong> {{ book.description|default:'None' }}
+            </p>
+            <p class="text-secondary"><strong>Published Year:</strong> {{ book.published_year }}</p>
+
+                    {# --------------------------- is_staff ------------------------------------------ #}
+
+{% if user.is_staff %}
+
+    {% if book.is_borrowed %}
+    <h5 style="color:green;" class="card-title">Already Borrowed</h5>
+    {% else %}
+    <h5 style="color:green;" class="card-title">Available</h5>
+    {% endif %}
+
+          <hr>
+
+<div class="d-grid gap-2">
+                <a href="{{ book.details_url }}" class="btn btn-primary">Details</a>
+                <a href="{{ book.update_ur }}" class="btn btn-success">Edit</a>
+                <a href="{% url 'books.index' %}" class="btn btn-dark">Back</a>
+            </div>
+{% endif %}
+
+                    {# --------------------------- is_student ------------------------------------------ #}
+
+
+{% if user.is_student %}
+
+    {% if book.is_borrowed %}
+    <h5 style="color:green;" class="card-title">Already Borrowed</h5>
+    {% else %}
+    <form action="{% url 'books.borrow' book.id %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary">Borrow</button>
+                </form>
+    {% endif %}
+
+
+{% endif %}
+
+
+</div>
+  </div>
+</div>
+
+
+{% endblock content %}

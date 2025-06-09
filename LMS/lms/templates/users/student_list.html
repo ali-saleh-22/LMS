@@ -1,0 +1,31 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+<h2>Student List</h2>
+<form method="GET" action="">
+    <input aria-label="" type="text" name="name" placeholder="Search by name" class="form-control" style="width: 200px; display: inline-block;">
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Date Joined</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.username }}</td>
+            <td>{{ student.id }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.first_name }} {{ student.last_name }}</td>
+            <td>{{ student.date_joined }}</td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
